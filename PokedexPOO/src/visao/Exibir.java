@@ -23,6 +23,7 @@ public class Exibir extends javax.swing.JInternalFrame {
     public Exibir() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,10 +38,14 @@ public class Exibir extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        tipoSelect = new javax.swing.JComboBox<>();
+        jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        pokeNome = new javax.swing.JTextField();
 
         setClosable(true);
 
-        jButton1.setText("Listar");
+        jButton1.setText("Listar Todos");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -59,18 +64,58 @@ public class Exibir extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Tipo 1", "Tipo 2"
+                "Id", "Nome", "Tipo 1", "Tipo 2", "Total", "HP", "Ataque", "Defesa", "Ataque Especial", "Defesa Especial", "Velocidade"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
+        if (tabela.getColumnModel().getColumnCount() > 0) {
+            tabela.getColumnModel().getColumn(0).setResizable(false);
+            tabela.getColumnModel().getColumn(1).setResizable(false);
+            tabela.getColumnModel().getColumn(2).setResizable(false);
+            tabela.getColumnModel().getColumn(3).setResizable(false);
+            tabela.getColumnModel().getColumn(4).setResizable(false);
+            tabela.getColumnModel().getColumn(5).setResizable(false);
+            tabela.getColumnModel().getColumn(7).setResizable(false);
+            tabela.getColumnModel().getColumn(8).setResizable(false);
+            tabela.getColumnModel().getColumn(9).setResizable(false);
+            tabela.getColumnModel().getColumn(10).setResizable(false);
+        }
+
+        tipoSelect.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Normal", "Fogo", "Água", "Grama", "Elétrico", "Pedra", "Gelo", "Lutador", "Veneno", "Terrestre", "Voador", "Psíquico", "Inseto", "Fantasma", "Noturno", "Dragão", "Metálico", "Fada" }));
+        tipoSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipoSelectActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Listar por Tipo");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Buscar por nome");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        pokeNome.setText("Nome do Pokemon");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,22 +127,36 @@ public class Exibir extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(pokeNome, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tipoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)
+                        .addComponent(pokeNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tipoSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton4)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,7 +173,7 @@ public class Exibir extends javax.swing.JInternalFrame {
         modelo.setNumRows(0);
 
         for (Pokemon p: pokemons){
-            Object[] dados ={p.getId(), p.getNome(), p.getTipo1(), p.getTipo2()};
+            Object[] dados ={p.getId(), p.getNome(), p.getTipo1(), p.getTipo2(), p.getTotal(), p.getHp(), p.getAtaque(), p.getDefesa(), p.getSpAtk(), p.getSpDef(), p.getVelocidade()};
             modelo.addRow(dados);
 
         }
@@ -137,11 +196,102 @@ public class Exibir extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void tipoSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoSelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipoSelectActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    String tipoS = tipoSelect.getSelectedItem().toString();  
+    Conexão fábrica = new Conexão();
+    JDBCPokemon gerente = new JDBCPokemon(fábrica.abrirConexão());
+    ArrayList<Pokemon> pokemons = gerente.listarPokemonTipo(tipoS);
+    fábrica.fecharConexão();
+    // TODO add your handling code here:
+    
+     DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
+     modelo.setNumRows(0);
+
+        for (Pokemon p: pokemons){
+            Object[] dados ={p.getId(), p.getNome(), p.getTipo1(), p.getTipo2(), p.getTotal(), p.getHp(), p.getAtaque(), p.getDefesa(), p.getSpAtk(), p.getSpDef(), p.getVelocidade()};
+            modelo.addRow(dados);
+
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String texto = pokeNome.getText();
+        Conexão fábrica = new Conexão();
+        JDBCPokemon gerente = new JDBCPokemon(fábrica.abrirConexão());
+        ArrayList<Pokemon> pokemons = gerente.listarPokemonNome(texto);
+        fábrica.fecharConexão();
+        
+        DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
+        modelo.setNumRows(0);
+
+        for (Pokemon p: pokemons){
+            Object[] dados ={p.getId(), p.getNome(), p.getTipo1(), p.getTipo2(), p.getTotal(), p.getHp(), p.getAtaque(), p.getDefesa(), p.getSpAtk(), p.getSpDef(), p.getVelocidade()};
+            modelo.addRow(dados);
+
+        }
+        pokeNome.setText("");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        // TODO add your handling code here:
+        int linha = tabela.getSelectedRow();
+       Object id = tabela.getValueAt(linha, 0);
+       
+       
+ 
+       
+        
+       Conexão fábrica = new Conexão();
+       JDBCPokemon gerente = new JDBCPokemon(fábrica.abrirConexão());
+       Pokemon pesquisa = gerente.listarPokemonId(id.toString());
+       fábrica.fecharConexão();
+       
+       DetalhesPokemon detalhes = new DetalhesPokemon();
+       Principal.desktop.add(detalhes);
+       detalhes.setVisible(true);
+       
+       String nome = pesquisa.getNome();
+       String tipo1 = pesquisa.getTipo1();
+       String tipo2 = pesquisa.getTipo2();
+       String total = Integer.toString(pesquisa.getTotal());
+       String hp = Integer.toString(pesquisa.getHp());
+       String ataque = Integer.toString(pesquisa.getAtaque());
+       String defesa = Integer.toString(pesquisa.getDefesa());
+       String SpAtk = Integer.toString(pesquisa.getSpAtk());
+       String SpDef = Integer.toString(pesquisa.getSpDef());
+       String speed = Integer.toString(pesquisa.getVelocidade());
+       
+       
+       detalhes.loadDetalhes(nome, tipo1, tipo2, total, hp, ataque, defesa, SpAtk, SpDef, speed);
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+        
+        
+        
+        
+    }//GEN-LAST:event_tabelaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField pokeNome;
     private javax.swing.JTable tabela;
+    private javax.swing.JComboBox<String> tipoSelect;
     // End of variables declaration//GEN-END:variables
 }

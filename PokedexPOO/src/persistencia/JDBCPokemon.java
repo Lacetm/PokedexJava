@@ -54,8 +54,18 @@ public class JDBCPokemon {
                 String nome = resposta.getString("nome");
                 String tipo1 = resposta.getString("tipo1");
                 String tipo2 = resposta.getString("tipo2");
+                int total = resposta.getInt("total");
+                int hp = resposta.getInt("hp");
+                int ataque = resposta.getInt("ataque");
+                int defesa = resposta.getInt("defesa");
+                int spAtk = resposta.getInt("spAtk");
+                int spDef = resposta.getInt("spDef");
+                int velocidade = resposta.getInt("velocidade");
                 
-                Pokemon p = new Pokemon(id, nome, tipo1, tipo2);
+                
+                
+                
+                Pokemon p = new Pokemon(id, nome, tipo1, tipo2, total, hp, ataque, defesa, spAtk, spDef, velocidade);
                 pokemons.add(p);
             }
                     
@@ -63,6 +73,115 @@ public class JDBCPokemon {
             e.printStackTrace();
         }
         return pokemons;
+    }
+    
+    public ArrayList<Pokemon> listarPokemonTipo(String tipo){
+        ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
+        
+        String sql = "SELECT id, nome, tipo1, tipo2, total, hp, ataque, defesa, spAtk, spDef, velocidade FROM pokemons WHERE tipo1 = '"+ tipo+"'" ;
+        
+        try{
+            Statement declaração = conexão.createStatement();
+            ResultSet resposta = declaração.executeQuery(sql);
+            
+            
+            while(resposta.next()){
+                
+                int id = resposta.getInt("id");
+                String nome = resposta.getString("nome");
+                String tipo1 = resposta.getString("tipo1");
+                String tipo2 = resposta.getString("tipo2");
+                int total = resposta.getInt("total");
+                int hp = resposta.getInt("hp");
+                int ataque = resposta.getInt("ataque");
+                int defesa = resposta.getInt("defesa");
+                int spAtk = resposta.getInt("spAtk");
+                int spDef = resposta.getInt("spDef");
+                int velocidade = resposta.getInt("velocidade");
+                
+                
+                
+                
+                Pokemon p = new Pokemon(id, nome, tipo1, tipo2, total, hp, ataque, defesa, spAtk, spDef, velocidade);
+                pokemons.add(p);
+            }
+                    
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return pokemons;
+    }
+    public ArrayList<Pokemon> listarPokemonNome(String texto){
+        ArrayList<Pokemon> pokemons = new ArrayList<Pokemon>();
+        
+        String sql = "SELECT id, nome, tipo1, tipo2, total, hp, ataque, defesa, spAtk, spDef, velocidade FROM pokemons WHERE nome = '"+ texto+"'" ;
+        
+        try{
+            Statement declaração = conexão.createStatement();
+            ResultSet resposta = declaração.executeQuery(sql);
+            
+            
+            while(resposta.next()){
+                
+                int id = resposta.getInt("id");
+                String nome = resposta.getString("nome");
+                String tipo1 = resposta.getString("tipo1");
+                String tipo2 = resposta.getString("tipo2");
+                int total = resposta.getInt("total");
+                int hp = resposta.getInt("hp");
+                int ataque = resposta.getInt("ataque");
+                int defesa = resposta.getInt("defesa");
+                int spAtk = resposta.getInt("spAtk");
+                int spDef = resposta.getInt("spDef");
+                int velocidade = resposta.getInt("velocidade");
+                
+                
+                
+                
+                Pokemon p = new Pokemon(id, nome, tipo1, tipo2, total, hp, ataque, defesa, spAtk, spDef, velocidade);
+                pokemons.add(p);
+            }
+                    
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return pokemons;
+    }
+     public Pokemon listarPokemonId(String texto){
+        Pokemon p = new Pokemon();
+        
+        String sql = "SELECT id, nome, tipo1, tipo2, total, hp, ataque, defesa, spAtk, spDef, velocidade FROM pokemons WHERE id = '"+texto+"'" ;
+        
+        try{
+            Statement declaração = conexão.createStatement();
+            ResultSet resposta = declaração.executeQuery(sql);
+            
+            
+            while(resposta.next()){
+                
+                int id = resposta.getInt("id");
+                String nome = resposta.getString("nome");
+                String tipo1 = resposta.getString("tipo1");
+                String tipo2 = resposta.getString("tipo2");
+                int total = resposta.getInt("total");
+                int hp = resposta.getInt("hp");
+                int ataque = resposta.getInt("ataque");
+                int defesa = resposta.getInt("defesa");
+                int spAtk = resposta.getInt("spAtk");
+                int spDef = resposta.getInt("spDef");
+                int velocidade = resposta.getInt("velocidade");
+                
+                
+                
+                
+                Pokemon poke = new Pokemon(id, nome, tipo1, tipo2, total, hp, ataque, defesa, spAtk, spDef, velocidade);
+                p = poke;
+            }
+                    
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return p;
     }
     
     
