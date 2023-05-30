@@ -1,6 +1,7 @@
 # PokedexJava
 Projeto feito utilizando MySQL e Netbeans para criar uma aplicação de registro e alterações em uma Pokedex
 
+Funcionalidades:
 
 ![image](https://github.com/Lacetm/PokedexJava/assets/89583862/19ef05c2-9ef0-4c3c-beb4-562f76b04970)
 Lista de Consultas aos Pokemons
@@ -15,4 +16,5 @@ Listagem dos treinadores cadastrados
 Registro da Equipe ao Treinador
 
 ![image](https://github.com/Lacetm/PokedexJava/assets/89583862/68b14a05-ac16-4764-ae94-71e60db289ea)
+
 Ao clicar duas vezes em qualquer tabela de consulta dos pokemons, é exibido o card de detalhes daquele Pokemon
